@@ -62,7 +62,7 @@ void setupMQTT() {
   mqttClient.setCallback(callback);
 }
 
-void publishMQTT(const char* mqttTopic, String value, int isSensor) {
+void publishMQTT(const char* mqttTopic, String value) {
     
     int result;
     char valueString[20];
@@ -71,13 +71,7 @@ void publishMQTT(const char* mqttTopic, String value, int isSensor) {
     if ( mqttClient.connected() ) {
         
         mqttClient.loop();
-        
-        // This is for DeviceHub for wich the topic is different between a sensor and actuator
-        if (isSensor)
-          value = "{\"value\": " + value + "}";
-        else
-          value = "{\"state\": " + value + "}";
-        
+              
         value.toCharArray(valueString,20);
         
         Serial.print("Topic: ");

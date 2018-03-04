@@ -221,18 +221,18 @@ void publicaStareaActuala() {
     // Publish only if we have connection to MQTT broker
     int isConnected = checkMQTT();
     if (isConnected) {
-        publishMQTT(mqttTopicCentralaElectrica, centralaElectrica, 0);
-        publishMQTT(mqttTopicCentralaGaz, centralaGaz, 0);
-        publishMQTT(mqttTopicCentralaLemne, centralaLemne, 0);
+        publishMQTT(mqttTopicCentralaElectrica, centralaElectrica);
+        publishMQTT(mqttTopicCentralaGaz, centralaGaz);
+        publishMQTT(mqttTopicCentralaLemne, centralaLemne);
 
-        publishMQTT(mqttTopicTermostatParter, stareTermostatParter, 0);
-        publishMQTT(mqttTopicTermostatEtaj, stareTermostatEtaj, 0);
+        publishMQTT(mqttTopicTermostatParter, stareTermostatParter);
+        publishMQTT(mqttTopicTermostatEtaj, stareTermostatEtaj);
 
-        publishMQTT(mqttTopicPompaParter, pompaParter, 0);
-        publishMQTT(mqttTopicPompaEtaj, pompaEtaj, 0);
-        publishMQTT(mqttTopicPompaPardoseala, pompaPardoseala, 0);
-        publishMQTT(mqttTopicPompaBoiler, pompaBoiler, 0);
+        publishMQTT(mqttTopicPompaParter, pompaParter);
+        publishMQTT(mqttTopicPompaEtaj, pompaEtaj);
+        publishMQTT(mqttTopicPompaPardoseala, pompaPardoseala);
+        publishMQTT(mqttTopicPompaBoiler, pompaBoiler);
 
-        publishMQTT(mqttTopicTemperaturaTur, temperaturaTur, 1);
+        publishMQTT(mqttTopicPufferTemperaturaTur, temperaturaTur);
     }
 }
