@@ -65,7 +65,7 @@ void setupMQTT() {
 void publishMQTT(const char* mqttTopic, String value, int isSensor) {
     
     int result;
-    char valueString[16];
+    char valueString[20];
 
     // Publish only if connection is fine to MQTT broker
     if ( mqttClient.connected() ) {
@@ -78,7 +78,7 @@ void publishMQTT(const char* mqttTopic, String value, int isSensor) {
         else
           value = "{\"state\": " + value + "}";
         
-        value.toCharArray(valueString,16);
+        value.toCharArray(valueString,20);
         
         Serial.print("Topic: ");
         Serial.print(mqttTopic);
@@ -86,6 +86,7 @@ void publishMQTT(const char* mqttTopic, String value, int isSensor) {
         Serial.print(value);
         
         result = mqttClient.publish(mqttTopic, valueString, 1);
+        
         if (result)
           Serial.println(" Publish: SUCCESS");
         else

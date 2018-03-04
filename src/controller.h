@@ -3,6 +3,7 @@
 
 //#define GAZ 1
 #define ELECTRIC 1
+#define START_TEMPERATURE 50
 
 // Set output GPIOs
 const int releuCentralaElectrica = 32;
@@ -41,6 +42,6 @@ const char* mqttTopicTemperaturaTur = "/a/06e2cfa4-e88b-45d8-aa9f-017c3e592a0c/p
 
 void publishMQTT(const char* mqttTopic, String value, int isSensor);
 int checkMQTT();
-String getTemperature();
+String getTemperature(float& readTemperature);
 
 #endif

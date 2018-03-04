@@ -25,6 +25,7 @@ int starePompaBoiler = 0;
 
 // Sensori de temperatura
 String temperaturaTur;
+float readTemperature;
 
 void setupGPIOs(){
     pinMode(releuCentralaElectrica, OUTPUT);   
@@ -65,12 +66,24 @@ void verificaTermostate(){
 }
 
 void verificaTemperatura() {
-    temperaturaTur = getTemperature();
+    temperaturaTur = getTemperature(readTemperature);
 }
 
-// Control centrale. Se opresc sau pornesc in functie de starile termostatelor
-void controlCentrale(){    
-    if (!stareNouaTermostatCentralaLemne){
+// Control centrale. Se opresc sau pornesc in functie de starile termostatelor si temperatura tur puffer
+void controlCentrale(){ 
+    
+    int temperaturaPufferOK = 0;
+    
+    // Verificam daca sensorul de temperatura este in parametrii
+    if ((readTemperature != -127) && (readTemperature != 85))
+        if (readTemperature > START_TEMPERATURE)
+            temperaturaPufferOK = 1;     
+    else
+        // Sensor de temperatura nefunctional ne bazam numai pe termostatul de contact
+        if (stareNouaTermostatCentralaLemne)
+            temperaturaPufferOK = 1;
+ 
+    if (!temperaturaPufferOK){
         stareCentralaLemne = 0;
         Serial.println("Nu merge centrala pe lemne");
         // Daca centrala pe lemne nu merge se verifica daca trebuie pornita centrala electrica sau cea pe gaz
@@ -170,7 +183,10 @@ void controlPardoseala(){
 }
 
 void controlBoiler() {
-    if ( stareCentralaLemne || stareCentralaGaz || stareCentralaElectrica) {
+    
+    int temperaturaPufferOK = stareCentralaLemne && (readTemperature > 45) && (readTemperature != 85);
+
+    if ( temperaturaPufferOK  || stareCentralaGaz || stareCentralaElectrica) {
         digitalWrite(releuPompaBoiler, LOW);
         starePompaBoiler = 1;
         Serial.println("Boiler: PORNIT");

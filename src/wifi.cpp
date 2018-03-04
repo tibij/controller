@@ -2,7 +2,7 @@
 #include <WiFi.h>
 
 // WiFi Credentials
-const char* ssid = "cgr";
+const char* ssid = "cgr_b";
 const char* password = "monchiX2";
 
 

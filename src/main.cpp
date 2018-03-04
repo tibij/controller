@@ -24,6 +24,9 @@ void loop() {
     // Citeste stare termostate
     Serial.println("Verifica stare termostate ...");
     verificaTermostate();
+
+    Serial.println("Citeste temperatura tur puffer ...");
+    verificaTemperatura();
     
     // Porneste/opreste centrala electrica sau cea de gaz
     Serial.println("Setup centrale ...");
@@ -48,8 +51,7 @@ void loop() {
     Serial.println("Salveaza stare curenta termostate ...");
     salveazaStareTermostate();
 
-    Serial.println("Citeste temperatura tur puffer ...");
-    verificaTemperatura();
+
 
     Serial.println("Publica stare curenta incalzire ...");
     publicaStareaActuala();
