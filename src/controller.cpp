@@ -23,10 +23,6 @@ int starePompaEtaj = 0;
 int starePompaPardoseala = 0;
 int starePompaBoiler = 0;
 
-// Sensori de temperatura
-String temperaturaTur;
-float readTemperature;
-
 void setupGPIOs(){
     pinMode(releuCentralaElectrica, OUTPUT);   
     pinMode(releuCentralaGaz, OUTPUT);
@@ -67,6 +63,7 @@ void verificaTermostate(){
 
 void verificaTemperatura() {
     temperaturaTur = getTemperature(readTemperature);
+    Serial.println(temperaturaTur);
 }
 
 // Control centrale. Se opresc sau pornesc in functie de starile termostatelor si temperatura tur puffer

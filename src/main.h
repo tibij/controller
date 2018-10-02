@@ -14,3 +14,5 @@ void controlPardoseala();
 void controlBoiler();
 void salveazaStareTermostate();
 void publicaStareaActuala();
+
+String getTemperature();

@@ -48,13 +48,11 @@ void loop() {
     Serial.println("Setup pompa boiler ...");
     controlBoiler();
     
-    Serial.println("Salveaza stare curenta termostate ...");
+    // Serial.println("Salveaza stare curenta termostate ...");
     salveazaStareTermostate();
-
-
 
     Serial.println("Publica stare curenta incalzire ...");
     publicaStareaActuala();
 
-    delay(5000);
+    delay(2000);
 }

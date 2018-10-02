@@ -3,9 +3,9 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-//#define GAZ 1
-#define ELECTRIC 1
-#define START_TEMPERATURE 30
+#define GAZ 1
+//#define ELECTRIC 1
+#define START_TEMPERATURE 35
 
 // Set output GPIOs
 const int releuCentralaElectrica = 32;
@@ -44,6 +44,11 @@ const char* mqttTopicPompaBoiler = "house/demisol/centrala/pompaBoiler/state";
 
 void publishMQTT(const char* mqttTopic, String value);
 int checkMQTT();
-String getTemperature(float& readTemperature);
+
+// Sensori de temperatura
+String temperaturaTur;
+float readTemperature;
+
+String getTemperature(float& readTemp);
 
 #endif
