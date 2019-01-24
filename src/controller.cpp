@@ -24,7 +24,7 @@ int starePompaPardoseala = 0;
 int starePompaBoiler = 0;
 
 void setupGPIOs(){
-    pinMode(releuCentralaElectrica, OUTPUT);   
+    // pinMode(releuCentralaElectrica, OUTPUT);   
     pinMode(releuCentralaGaz, OUTPUT);
     pinMode(releuPompaParter, OUTPUT);
     pinMode(releuPompaEtaj, OUTPUT);
