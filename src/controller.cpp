@@ -126,12 +126,12 @@ void controlCentrale(){
         #endif        
     }
 }
-// Functie de control incalzire parter
+// Functie de control incalzire parter, prin pornirea pompei parter doar in caz ca merge centrala pe lemne
 void controlParter(){   
     // Compara starea anterioara cu starea citita
     if (stareCurentaTermostatParter != stareNouaTermostatParter)
-        // Incalzire etaj ON
-        if (stareNouaTermostatParter){
+        // Incalzire parter ON, pornim pompa daca suntem pe lemne
+        if (stareNouaTermostatParter && stareCentralaLemne){
             // Pornim pompa parter
             digitalWrite(releuPompaParter, LOW);
             starePompaParter = 1;
@@ -144,12 +144,12 @@ void controlParter(){
         }
 }
 
-// Functie de control incalzire etaj
+// Functie de control incalzire etaj, prin pornirea pompei etaj doar in caz ca merge centrala pe lemne
 void controlEtaj(){   
     // Compara starea anterioara cu starea citita
     if (stareCurentaTermostatEtaj != stareNouaTermostatEtaj)
-        // Incalzire etaj ON
-        if (stareNouaTermostatEtaj){
+        // Incalzire etaj ON, pornim pompa daca suntem pe lemne
+        if (stareNouaTermostatEtaj && stareCentralaLemne){
             // Pornim pompa etaj
             digitalWrite(releuPompaEtaj, LOW);
             starePompaEtaj = 1;
@@ -166,16 +166,17 @@ void controlEtaj(){
 void controlPardoseala(){   
     // Verifica daca exista cerere de incalzire la etaj sau la parter
     if (stareCurentaTermostatParter || stareCurentaTermostatEtaj){
-        // Etajul sau parterul sunt incalzite. Pornim pompa pardoseala
-        digitalWrite(releuPompaPardoseala, LOW);
+        // Etajul sau parterul sunt incalzite. Pornim pompa pardoseala din beci daca suntem pe lemne
+        if (stareCentralaLemne)
+            digitalWrite(releuPompaPardoseala, LOW);
         starePompaPardoseala = 1;
-        // Aici va trebui trimis un semnal la etaj sa porneasca pompa de la distribuitor
+        // Starea pompei este citita de actuatorul de la etaj ca sa porneasca pompa de la distribuitor
     }
     else {
         // Oprim pompa pardoseala
         digitalWrite(releuPompaPardoseala, HIGH);
         starePompaPardoseala = 0;
-        // Aici va trebui trimis un semnal la etaj sa opreasca pompa de la distribuitor
+        // Starea pompei este citita de actuatorul de la etaj ca sa opreasca pompa de la distribuitor
     }
 }
 
